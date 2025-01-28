@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Empolyee Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+  <header class="bg-dark text-light text-center py-3">
+    <!-- <nav>
+      <div class="container">
+        <a class="" href="index.html">Company Logo</a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="empolyee.html">Employee</a></li>
+        </ul>
+      </div>
+    </nav> -->
+    <h2>Employee Details</h2>
+  </header>
+  <main class="container mt-4">
+
+    <section id="employeeDetails">
+    </section>
+
+  </main>
+
+  <script>
+    const employeeData = [
+      {id: "1", name: "John Doe", title: "Software Developer", department: "IT"},
+      {id: "2", name: "Jane Smith", title: "Designer", department: "Design"},
+      {id: "3", name: "Bob Johnson", title: "Project Manager", department: "Management"}
+    ]
+
+    function getParamsById(id) {
+      let url = new URL(window.location.href)
+
+      return url.searchParams.get(id)
+    }
+
+    let empolyeeId = getParamsById('id')
+
+    let employee;
+    for (let i = 0; i < employeeData.length; i++) {
+      if (employeeData[i].id === empolyeeId) {
+        employee = employeeData[i]
+      }
+    }
+
+    let employeeDetailElement = document.getElementById('employeeDetails')
+    if (employee) {
+      employeeDetailElement.innerHTML = `
+      <div class="card">
+        <div class="card-body">
+           <h2 class="card-title">${employee.name}</h2>
+           <ul class="list-group list-group-flush">
+             <li class="list-group-item">Name: ${employee.name}</li>
+             <li class="list-group-item">Designation: ${employee.title}</li>
+             <li class="list-group-item">Department: ${employee.department}</li>
+           </ul>
+         </div>
+       </div>
+      `
+    } else {
+      employeeDetailElement.innerHTML = `Employee not found`
+    }
+
+
+
+  </script>
+</body>
+
+</html>
